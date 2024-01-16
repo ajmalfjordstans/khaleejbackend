@@ -2,7 +2,7 @@ import express from "express"
 import bodyParser from "body-parser";
 import nodemailer from 'nodemailer'
 import cors from 'cors'
-import { PORT } from "../config.js";
+import { PORT } from "./config.js";
 
 const app = express();
 
