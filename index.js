@@ -16,6 +16,10 @@ app.use(
   })
 )
 
+app.get('/test',(req,res)=>{
+  return res.status(201).send("Test working")
+})
+
 app.post('/majlis-form', (req, res) => {
   try {
     const formData = req.body;
