@@ -10,9 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'http://khaleejmandi.co.uk', 'https://khaleejmandi.co.uk/'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowHeaders: ['Content-Type']
+    allowHeaders: ['Content-Type'],
+    optionsSuccessStatus: 204,
   })
 )
 
