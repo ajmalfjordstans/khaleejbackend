@@ -49,7 +49,7 @@ app.post('/contact-form', (req, res) => {
 
 function sendEmailToAdmin(formData, subject) {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.in',
+    host: 'smtp.zoho.com',
     port: 465,
     secure: true,
     auth: {
@@ -86,7 +86,7 @@ function sendEmailToAdmin(formData, subject) {
 
 function sendConfirmationEmail(formData) {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.in',
+    host: 'smtp.zoho.com',
     secure: true,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
