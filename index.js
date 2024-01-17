@@ -105,7 +105,6 @@ function sendConfirmationEmail(formData) {
     <p>Time: ${formData.time}</p>
     <p>No. of Persons: ${formData.numberOfPersons}</p>
     <p>Message: ${formData.message}</p>
-    // <p>Thanks for dining with us</p>
     ...`, // Add other form fields
   };
 
