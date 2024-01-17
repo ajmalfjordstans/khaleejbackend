@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://khaleejmandi.co.uk', 'https://khaleejmandi.co.uk/', 'https://khaleej.vercel.app/'],
+    origin: ['http://localhost:3000', 'http://khaleejmandi.co.uk', 'https://khaleejmandi.co.uk', 'https://khaleej.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowHeaders: ['Content-Type'],
     optionsSuccessStatus: 204,
@@ -51,7 +51,7 @@ function sendEmailToAdmin(formData, subject) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.in',
     // port: 465,
-    // secure: false,
+    secure: false,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
       pass: 'HWpvqLKuVEid',
@@ -87,7 +87,7 @@ function sendEmailToAdmin(formData, subject) {
 function sendConfirmationEmail(formData) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.in',
-    // secure: true,
+    secure: false,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
       pass: 'HWpvqLKuVEid',
