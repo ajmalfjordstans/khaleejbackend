@@ -50,8 +50,8 @@ app.post('/contact-form', (req, res) => {
 function sendEmailToAdmin(formData, subject) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.in',
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
       pass: 'HWpvqLKuVEid',
@@ -75,6 +75,14 @@ function sendEmailToAdmin(formData, subject) {
     ...`, // Add other form fields
   };
 
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Server is ready to take our messages');
+    }
+  });
+
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error(error);
@@ -87,8 +95,8 @@ function sendEmailToAdmin(formData, subject) {
 function sendConfirmationEmail(formData) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.in',
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
       pass: 'HWpvqLKuVEid',
