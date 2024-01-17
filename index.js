@@ -49,17 +49,22 @@ app.post('/contact-form', (req, res) => {
 
 function sendEmailToAdmin(formData, subject) {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.in',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-      user: 'leicester@khaleejmandi.co.uk',
-      pass: 'HWpvqLKuVEid',
+      user: 'frontend.fjordstans@gmail.com',
+      pass: 'nfhw gklr kyyh fvtv',
     },
+    // host: 'smtp.zoho.in',
+    // port: 465,
+    // secure: true,
+    // auth: {
+    //   user: 'leicester@khaleejmandi.co.uk',
+    //   pass: 'HWpvqLKuVEid',
+    // },
   });
 
   const mailOptions = {
-    from: 'leicester@khaleejmandi.co.uk',
+    from: 'frontend.fjordstans@gmail.com',
     to: 'leicester@khaleejmandi.co.uk',
     subject: subject,
     html: `<p>Name: ${formData.name}</p>
@@ -94,17 +99,22 @@ function sendEmailToAdmin(formData, subject) {
 
 function sendConfirmationEmail(formData) {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.in',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-      user: 'leicester@khaleejmandi.co.uk',
-      pass: 'HWpvqLKuVEid',
+      user: 'frontend.fjordstans@gmail.com',
+      pass: 'nfhw gklr kyyh fvtv',
     },
+    // host: 'smtp.zoho.in',
+    // port: 465,
+    // secure: true,
+    // auth: {
+    //   user: 'leicester@khaleejmandi.co.uk',
+    //   pass: 'HWpvqLKuVEid',
+    // },
   });
 
   const mailOptions = {
-    from: 'leicester@khaleejmandi.co.uk',
+    from: 'frontend.fjordstans@gmail.com',
     to: formData.email,
     subject: 'Majlis Booking Received',
     html: `<p>Name: ${formData.name}</p>
