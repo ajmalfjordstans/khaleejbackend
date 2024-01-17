@@ -17,7 +17,7 @@ app.use(
   })
 )
 
-app.get('/test',(req,res)=>{
+app.get('/test', (req, res) => {
   return res.status(201).send("Test working")
 })
 
@@ -49,16 +49,18 @@ app.post('/contact-form', (req, res) => {
 
 function sendEmailToAdmin(formData, subject) {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.zoho.in',
+    port: 465,
+    secure: true,
     auth: {
-      user: 'frontend.fjordstans@gmail.com',
-      pass: 'nfhw gklr kyyh fvtv',
+      user: 'leicester@khaleejmandi.co.uk',
+      pass: 'HWpvqLKuVEid',
     },
   });
 
   const mailOptions = {
-    from: 'frontend.fjordstans@gmail.com',
-    to: 'frontend.fjordstans@gmail.com',
+    from: 'leicester@khaleejmandi.co.uk',
+    to: 'leicester@khaleejmandi.co.uk',
     subject: subject,
     html: `<p>Name: ${formData.name}</p>
     <p>Email: ${formData.email}</p>
@@ -84,15 +86,16 @@ function sendEmailToAdmin(formData, subject) {
 
 function sendConfirmationEmail(formData) {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.zoho.in',
+    secure: true,
     auth: {
-      user: 'frontend.fjordstans@gmail.com',
-      pass: 'nfhw gklr kyyh fvtv',
+      user: 'leicester@khaleejmandi.co.uk',
+      pass: 'HWpvqLKuVEid',
     },
   });
 
   const mailOptions = {
-    from: 'frontend.fjordstans@gmail.com',
+    from: 'leicester@khaleejmandi.co.uk',
     to: formData.email,
     subject: 'Majlis Booking Received',
     html: `<p>Name: ${formData.name}</p>
@@ -102,7 +105,7 @@ function sendConfirmationEmail(formData) {
     <p>Time: ${formData.time}</p>
     <p>No. of Persons: ${formData.numberOfPersons}</p>
     <p>Message: ${formData.message}</p>
-    <p>Thanks for dining with us</p>
+    // <p>Thanks for dining with us</p>
     ...`, // Add other form fields
   };
 
