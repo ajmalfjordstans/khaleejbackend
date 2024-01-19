@@ -3,9 +3,11 @@ import bodyParser from "body-parser";
 import nodemailer from 'nodemailer'
 import cors from 'cors'
 import { PORT } from "./config.js";
+import axios from "axios";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
@@ -17,8 +19,32 @@ app.use(
   })
 )
 
-app.get('/test', (req, res) => {
-  return res.status(201).send("Test working")
+app.get('/instagram-media', async (req, res) => {
+  // console.log(process.env.USER_ID, process.env.ACCESS_TOKEN);
+  try {
+    const apiEndpoint = `https://graph.instagram.com/${process.env.USER_ID}?fields=id,username,media{id,media_type,media_url,thumbnail_url,permalink}&access_token=${process.env.ACCESS_TOKEN}`
+    const apiResponse = await axios.get(apiEndpoint);
+
+    // Return the response from the external API
+
+    res.json(apiResponse.data.media.data);
+  } catch (error) {
+    console.error('Error fetching data from the API:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+  // return res.status(201).send("Test working")
+})
+app.get('/testimonial', async (req, res) => {
+  // console.log(process.env.USER_ID, process.env.ACCESS_TOKEN);
+  try {
+    const apiEndpoint = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${process.env.PLACE_ID}&fields=reviews&key=${process.env.PLACES_KEY}`
+    const apiResponse = await axios.get(apiEndpoint);
+    // Return the response from the external API
+    res.json(apiResponse.data.result.reviews);
+  } catch (error) {
+    console.error('Error fetching data from the API:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 })
 
 app.post('/majlis-form', (req, res) => {
