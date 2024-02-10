@@ -13,7 +13,7 @@ export function sendEmailToAdmin(formData, subject) {
 
   const mailOptions = {
     from: 'leicester@khaleejmandi.co.uk',
-    to: 'frontend.fjordstans@gmail.com',
+    to: 'leicester@khaleejmandi.co.uk',
     subject: subject,
     html: `<p>Name: ${formData.name}</p>
     <p>Email: ${formData.email}</p>
