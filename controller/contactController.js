@@ -9,6 +9,7 @@ export const contactController = async (req, res) => {
       name: req.body.name,
       phoneNumber: req.body.phoneNumber,
       message: req.body.message,
+      status: 'new'
     }
     const response = db.collection('enquiries').doc(id).set(contactDetails)
     console.log(response);
@@ -30,6 +31,28 @@ export const getContactsController = async (req, res) => {
       responseArr.push(doc.data())
     })
     res.send(responseArr)
+  } catch (error) {
+    res.send(error)
+  }
+}
+
+export const updateContactsController = async (req, res) => {
+  try {
+    // console.log(req)
+    const userRef = db.collection("enquiries").doc(req.params.id)
+      .update({
+        status: req.body.status
+      })
+    res.send(userRef)
+  } catch (error) {
+    res.send(error)
+  }
+}
+
+export const deleteContactsController = async (req, res) => {
+  try {
+    const response = await db.collection("enquiries").doc(req.params.id).delete()
+    res.send(response)
   } catch (error) {
     res.send(error)
   }

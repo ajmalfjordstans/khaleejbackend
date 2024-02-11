@@ -1,9 +1,11 @@
 import express from "express";
-import { contactController, getContactsController } from "../controller/contactController.js";
+import { contactController, deleteContactsController, getContactsController, updateContactsController } from "../controller/contactController.js";
 
 const router = express.Router();
 
 router.post("/", contactController);
 router.get("/getEnquiries", getContactsController);
+router.post("/updateEnquiries/:id", updateContactsController);
+router.delete("/deleteEnquiries/:id", deleteContactsController);
 
 export default router;
