@@ -15,7 +15,7 @@ export const contactController = async (req, res) => {
     console.log(response);
     const formData = req.body;
     // Send email to admin
-    sendEmailToAdmin(formData, "New Enquiry");
+    sendEmailToAdmin(formData, "enquiry", "New Enquiry");
     res.status(201).send(formData);
   } catch (error) {
     return res.status(500).send({ message: error.message })

@@ -11,7 +11,7 @@ export function sendEmailToAdmin(formData, id, subject) {
     },
   });
 
-  const mailOptions = {
+  const mailOptionsBooking = {
     from: 'leicester@khaleejmandi.co.uk',
     to: 'leicester@khaleejmandi.co.uk',
     subject: subject,
@@ -35,8 +35,30 @@ export function sendEmailToAdmin(formData, id, subject) {
         </div>
     </div>`, // Add other form fields
   };
+  const mailOptionsEnquiry = {
+    from: 'leicester@khaleejmandi.co.uk',
+    to: 'leicester@khaleejmandi.co.uk',
+    subject: subject,
+    html: `
+    <div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: #333333; margin-bottom: 20px;">New Majlis Booking Received</h1>
+        <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
+            <p style="color: #666666; margin: 5px 0;"><strong>Name:</strong> ${formData.name}</p>
+            <p style="color: #666666; margin: 5px 0;"><strong>Email:</strong> ${formData.email}</p>
+            <p style="color: #666666; margin: 5px 0;"><strong>Phone:</strong> ${formData.phoneNumber}</p>
+            ${formData.date ? `
+            <div>
+              <p style="color: #666666; margin: 5px 0;"><strong>Date:</strong> ${formData.date}</p>
+              <p style="color: #666666; margin: 5px 0;"><strong>Time:</strong> ${formData.time}</p>
+            </div>`
+        :
+        ''}
+            <p style="color: #666666; margin: 5px 0;"><strong>Message:</strong> ${formData.message}</p>
+        </div>
+    </div>`, // Add other form fields
+  };
 
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(id === 'enquiry' ? mailOptionsEnquiry : mailOptionsBooking, (error, info) => {
     if (error) {
       console.error(error);
     } else {
@@ -47,11 +69,6 @@ export function sendEmailToAdmin(formData, id, subject) {
 
 export function sendConfirmationEmail(formData, id) {
   const transporter = nodemailer.createTransport({
-    // service: 'gmail',
-    // auth: {
-    //   user: 'frontend.fjordstans@gmail.com',
-    //   pass: 'nfhw gklr kyyh fvtv',
-    // },
     host: 'smtp.zoho.in',
     port: 587,
     secure: false,
