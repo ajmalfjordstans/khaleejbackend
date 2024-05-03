@@ -82,7 +82,7 @@ export function sendConfirmationEmail(formData, id) {
             <p style="color: #666666; margin: 5px 0;"><strong>Message:</strong> ${formData.message}</p>
         </div>
         <p style="color: #666666; margin-bottom: 20px;">Thank you for choosing our restaurant for your reservation. We look forward to serving you!</p>
-        <img src="https://www.khaleejmandi.co.uk/hmc%20black.png" alt="Image" style="max-width: 100px; height: auto;">
+        // <img src="https://www.khaleejmandi.co.uk/hmc%20black.png" alt="Image" style="max-width: 100px; height: auto;">
       <div/>`, // Add other form fields
   };
 
@@ -128,7 +128,7 @@ export function sendUpdateEmail(formData, update, id) {
             <p style="color: #666666; margin: 5px 0;"><strong>Message:</strong> ${formData.message}</p>
         </div>
         <p style="color: #666666; margin-bottom: 20px;">Thank you for choosing our restaurant for your reservation. We look forward to serving you!</p>
-        <img src="https://www.khaleejmandi.co.uk/hmc%20black.png" alt="Image" style="max-width: 100px; height: auto;">
+        // <img src="https://www.khaleejmandi.co.uk/hmc%20black.png" alt="Image" style="max-width: 100px; height: auto;">
       <div/>`, // Add other form fields
   };
 
