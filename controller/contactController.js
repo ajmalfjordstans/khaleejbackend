@@ -11,7 +11,7 @@ export const contactController = async (req, res) => {
       message: req.body.message,
       status: 'new'
     }
-    const response = db.collection('enquiries').doc(id).set(contactDetails)
+    const response = await db.collection('enquiries').doc(id).set(contactDetails)
     console.log(response);
     const formData = req.body;
     // Send email to admin

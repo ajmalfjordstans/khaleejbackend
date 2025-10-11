@@ -1,6 +1,6 @@
 import admin from 'firebase-admin'
 import dotenv from 'dotenv';
-import credentials from './key.json' assert { type: "json" }
+import credentials from './key.json' with { type: 'json' }
 
 dotenv.config();
 
@@ -20,8 +20,17 @@ dotenv.config();
 
 
 admin.initializeApp({
-  credential: admin.credential.cert(credentials)
+  credential: admin.credential.cert(credentials),
+  projectId: credentials.project_id
 })
+
+// Simple sanity logs
+// console.log('Firebase Admin initialized for project:', admin.app().options.projectId);
+// console.log('Service account fields present:', {
+//   project_id: !!credentials.project_id,
+//   client_email: !!credentials.client_email,
+//   private_key: !!credentials.private_key,
+// });
 
 const db = admin.firestore()
 

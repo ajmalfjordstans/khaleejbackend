@@ -1,5 +1,6 @@
 import { sendEmailToAdmin, sendConfirmationEmail, sendUpdateEmail } from '../services/emailService.js';
 import db from '../firebase.js';
+import admin from 'firebase-admin';
 
 const generateBookingNumber = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -23,10 +24,19 @@ export const createMajlisBooking = async (req, res) => {
       numberOfPersons: req.body.numberOfPersons,
       phoneNumber: req.body.phoneNumber,
       message: req.body.message,
-      status: "pending"
+      status: "pending",
+      createddatetime: admin.firestore.FieldValue.serverTimestamp()
     }
-    const response = db.collection('reservation').doc(id).set(userJson)
-    console.log(response);
+    const writeResult = await db.collection('reservation').doc(id).set(userJson)
+    // console.log('WriteResult:', writeResult);
+
+    // Verify by reading back
+    const docSnap = await db.collection('reservation').doc(id).get();
+    // console.log('Reservation exists:', docSnap.exists, 'ID:', id);
+    if (!docSnap.exists) {
+      console.error('Reservation not found after write. Check project/credentials.');
+    }
+
     // Send email to admin
     sendEmailToAdmin(formData, id, "New Majlis Booking");
     // Send confirmation email to user
@@ -39,7 +49,7 @@ export const createMajlisBooking = async (req, res) => {
 
 export const getMajlisReservations = async (req, res) => {
   try {
-    const usersRef = db.collection("reservation")
+    const usersRef = db.collection("reservation").orderBy('createddatetime', 'desc')
     const response = await usersRef.get()
     let responseArr = [];
     response.forEach(doc => {
