@@ -28,11 +28,11 @@ export const createMajlisBooking = async (req, res) => {
       createddatetime: admin.firestore.FieldValue.serverTimestamp()
     }
     const writeResult = await db.collection('reservation').doc(id).set(userJson)
-    // console.log('WriteResult:', writeResult);
+    console.log('WriteResult:', writeResult);
 
     // Verify by reading back
     const docSnap = await db.collection('reservation').doc(id).get();
-    // console.log('Reservation exists:', docSnap.exists, 'ID:', id);
+    console.log('Reservation exists:', docSnap.exists, 'ID:', id);
     if (!docSnap.exists) {
       console.error('Reservation not found after write. Check project/credentials.');
     }
