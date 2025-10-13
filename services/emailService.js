@@ -70,7 +70,7 @@ async function sendWithProvider({ from, to, subject, html }) {
 
 export function sendEmailToAdmin(formData, id, subject) {
   const from = process.env.EMAIL_FROM_ADDRESS || 'leicester@khaleejmandi.co.uk';
-  const to = process.env.EMAIL_TO_ADDRESS || 'leicester@khaleejmandi.co.uk';
+  const to = 'khaleejfoodsuk@gmail.com';
 
   let html;
   if (id === 'enquiry') {
@@ -117,7 +117,7 @@ export function sendEmailToAdmin(formData, id, subject) {
 }
 
 export function sendConfirmationEmail(formData, id) {
-  const from = process.env.EMAIL_FROM_ADDRESS || 'khaleejfoodsuk@gmail.com';
+  const from = process.env.EMAIL_FROM_ADDRESS || 'leicester@khaleejmandi.co.uk';
   const to = formData.email;
   const subject = `Majlis Booking Received`;
   const html = `
