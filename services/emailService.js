@@ -3,8 +3,8 @@ import nodemailer from 'nodemailer'
 export function sendEmailToAdmin(formData, id, subject) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.in',
-    port: 587,
-    secure: false,
+    port: 465, //587
+    secure: true,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
       pass: 'HWpvqLKuVEid',
@@ -70,8 +70,8 @@ export function sendEmailToAdmin(formData, id, subject) {
 export function sendConfirmationEmail(formData, id) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.in',
-    port: 587,
-    secure: false,
+    port: 465,
+    secure: true,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
       pass: 'HWpvqLKuVEid',
@@ -115,8 +115,8 @@ export function sendUpdateEmail(formData, update, id) {
   console.log(formData);
   const transporter = nodemailer.createTransport({
     host: 'smtp.zoho.in',
-    port: 587,
-    secure: false,
+    port: 465,
+    secure: true,
     auth: {
       user: 'leicester@khaleejmandi.co.uk',
       pass: 'HWpvqLKuVEid',
