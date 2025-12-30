@@ -5,26 +5,31 @@ const EMAIL_PROVIDER = process.env.EMAIL_PROVIDER || 'sendgrid';
 
 async function sendWithProvider({ from, to, subject, html }) {
   if (EMAIL_PROVIDER === 'sendgrid') {
-    console.log('Sending email with SendGrid:', from, "-", to);
-    if (!process.env.SENDGRID_API_KEY) throw new Error('Missing SENDGRID_API_KEY');
-    const replyTo = process.env.REPLY_TO_ADDRESS; // optional
-    await axios.post(
-      'https://api.sendgrid.com/v3/mail/send',
-      {
-        personalizations: [{ to: [{ email: to }] }],
-        from: { email: 'leicester@khaleejmandi.co.uk' },
-        reply_to: replyTo ? { email: replyTo } : undefined,
-        subject,
-        content: [{ type: 'text/html', value: html }],
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
-          'Content-Type': 'application/json',
+    try {
+      console.log('Sending email with SendGrid:', from, "-", to);
+      if (!process.env.SENDGRID_API_KEY) throw new Error('Missing SENDGRID_API_KEY');
+      const replyTo = process.env.REPLY_TO_ADDRESS; // optional
+      await axios.post(
+        'https://api.sendgrid.com/v3/mail/send',
+        {
+          personalizations: [{ to: [{ email: to }] }],
+          from: { email: 'leicester@khaleejmandi.co.uk' },
+          reply_to: replyTo ? { email: replyTo } : undefined,
+          subject,
+          content: [{ type: 'text/html', value: html }],
         },
-      }
-    );
-    return { provider: 'sendgrid' };
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return { provider: 'sendgrid' };
+    } catch (error) {
+      console.error('SendGrid failed, attempting fallback:', error.response?.data || error.message);
+      // Fall through to other providers
+    }
   }
 
   if (EMAIL_PROVIDER === 'resend') {
